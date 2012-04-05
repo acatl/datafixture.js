@@ -16,8 +16,9 @@ is the number of results we want to be generated
 
 if `numberOfResults` is == 0 it possible output an object. if > 0 it possible output an array of objects.
 
+# Examples
 
-# Generate a object with a randomly set numeric property
+## Generate a object with a randomly set numeric property
 
 ```js
 var template = {
@@ -32,7 +33,7 @@ DataFixture.generate(template, 0);
 
 ```
 
-# Generate an Array with a randomly set numeric property
+## Generate an Array with a randomly set numeric property
 
 ```js
 var template = {
@@ -53,7 +54,7 @@ DataFixture.generate(template, 20); /* second parameter indicates the number of 
 ```
 
 
-# Generate numbers with decimals
+## Generate numbers with decimals
 
 ```js
 var template = {
@@ -68,7 +69,7 @@ DataFixture.generate(template, 0);
 
 ```
 
-# Generate a string from a defined set of values 
+## Generate a string from a defined set of values 
 
 ```js
 var template = {
@@ -83,7 +84,7 @@ DataFixture.generate(template, 0);
 
 ```
 
-# Generate a string from a defined set of values with mixed types 
+## Generate a string from a defined set of values with mixed types 
 
 ```js
 var template = {
@@ -98,7 +99,7 @@ DataFixture.generate(template, 0);
 
 ```
 
-# One level template
+## One level template
 
 ```js
 var template = {
@@ -116,7 +117,7 @@ DataFixture.generate(template, 0);
 ```
 
 
-# Nested levels template
+## Nested levels template
 
 ```js
 var template = {
@@ -140,3 +141,10 @@ DataFixture.generate(template, 0);
 }
 
 ```
+
+
+enjoy!
+
+All feedback is welcomed
+
+
