@@ -2,7 +2,11 @@
 
 Generates random data based on a defined template model.
 
-# Method: `DataFixture.generate`
+jsfiddle example: 
+
+[http://jsfiddle.net/acatl/QC3Av/](http://jsfiddle.net/acatl/QC3Av/)
+
+# Method: DataFixture.generate
 
 ```js
 DataFixture.generate(templateObject, numberOfResults);
