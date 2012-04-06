@@ -146,7 +146,7 @@ DataFixture.generate(template, 0);
 
 ```
 
-## Values of properties can also be functions <span style="background:green; color:white;">NEW!</span>
+## Values of properties can also be functions
 
 ```js
 var df = DataFixture.generate({
