@@ -1,4 +1,4 @@
-#datafixture.js"
+#datafixture.js#
 
 Generates random data based on a defined template model.
 
