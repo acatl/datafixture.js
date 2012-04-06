@@ -146,6 +146,27 @@ DataFixture.generate(template, 0);
 
 ```
 
+## Values of properties can also be functions <span style="background:green; color:white;">NEW!</span>
+
+```js
+var df = DataFixture.generate({
+	coordinates:function(){
+		return DataFixture.getRandom(0,30) + ":" + DataFixture.getRandom(0,15);
+	}
+},10);
+
+// possible output
+[ { coordinates: '15:7' },
+  { coordinates: '14:11' },
+  { coordinates: '19:15' },
+  { coordinates: '15:9' },
+  { coordinates: '17:2' },
+  { coordinates: '25:3' },
+  { coordinates: '4:1' },
+  { coordinates: '12:9' },
+  { coordinates: '15:2' },
+  { coordinates: '7:8' } ]
+```
 
 enjoy!
 
