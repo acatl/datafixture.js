@@ -56,6 +56,10 @@ var DataFixture = (function() {
 			}
 		}
 
+		if (typeof columnValue == "function") {
+			return columnValue();
+		}
+
 		if (typeof columnValue == "object") {
 			if (columnValue.hasOwnProperty("length")) {
 				return columnValue[getRandom(0, columnValue.length - 1)];
@@ -112,3 +116,4 @@ var DataFixture = (function() {
 	};
 
 })();
+
