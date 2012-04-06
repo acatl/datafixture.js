@@ -1,0 +1,211 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>datafixture.js by acatl</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/acatl/datafixture.js">Fork On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/acatl/datafixture.js/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/acatl/datafixture.js/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>datafixture.js</h1>
+          <p>generates random data based on a defined template model</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/acatl">acatl</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>jsfiddle example</h1>
+
+<p><a href="http://jsfiddle.net/acatl/QC3Av/">http://jsfiddle.net/acatl/QC3Av/</a></p>
+
+<h1>Method: DataFixture.generate</h1>
+
+<div class="highlight">
+<pre><span class="nx">DataFixture</span><span class="p">.</span><span class="nx">generate</span><span class="p">(</span><span class="nx">templateObject</span><span class="p">,</span> <span class="nx">numberOfResults</span><span class="p">);</span>
+</pre>
+</div>
+
+
+<h2>templateObject</h2>
+
+<p>is an object with at least one property.</p>
+
+<h2>numberOfResults</h2>
+
+<p>is the number of results we want to be generated</p>
+
+<p>if <code>numberOfResults</code> is == 0 it outputs an object. if &gt; 0 it outputs an array of objects.</p>
+
+<h1>Examples</h1>
+
+<h2>Generate a object with a randomly set numeric property</h2>
+
+<div class="highlight">
+<pre><span class="kd">var</span> <span class="nx">template</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">like</span><span class="o">:</span> <span class="s2">"0...100"</span> <span class="cm">/* generate a number between 0 an 100, with no decimals */</span>
+<span class="p">};</span>
+<span class="nx">DataFixture</span><span class="p">.</span><span class="nx">generate</span><span class="p">(</span><span class="nx">template</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="c1">// possible output</span>
+<span class="p">{</span>
+    <span class="nx">like</span><span class="o">:</span> <span class="mi">23</span>
+<span class="p">}</span>
+
+</pre>
+</div>
+
+
+<h2>Generate an Array with a randomly set numeric property</h2>
+
+<div class="highlight">
+<pre><span class="kd">var</span> <span class="nx">template</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">like</span><span class="o">:</span> <span class="s2">"0...100"</span> <span class="cm">/* generate a number between 0 an 100, with no decimals */</span>
+<span class="p">};</span>
+<span class="nx">DataFixture</span><span class="p">.</span><span class="nx">generate</span><span class="p">(</span><span class="nx">template</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span> <span class="cm">/* second parameter indicates the number of elements */</span>
+
+<span class="c1">// possible output</span>
+<span class="p">[</span>
+    <span class="p">{</span><span class="nx">like</span><span class="o">:</span> <span class="mi">23</span><span class="p">},</span>
+    <span class="p">{</span><span class="nx">like</span><span class="o">:</span> <span class="mi">3</span><span class="p">},</span>
+    <span class="p">{</span><span class="nx">like</span><span class="o">:</span> <span class="mi">2</span><span class="p">},</span>
+    <span class="p">{</span><span class="nx">like</span><span class="o">:</span> <span class="mi">22</span><span class="p">},</span>
+    <span class="p">{</span><span class="nx">like</span><span class="o">:</span> <span class="mi">10</span><span class="p">},</span>
+    <span class="p">...</span>
+<span class="p">]</span>
+
+</pre>
+</div>
+
+
+<h2>Generate numbers with decimals</h2>
+
+<div class="highlight">
+<pre><span class="kd">var</span> <span class="nx">template</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">like</span><span class="o">:</span> <span class="s2">"0...100:2"</span> <span class="cm">/* generate a number between 0 an 100, with 2 decimals */</span>
+<span class="p">};</span>
+<span class="nx">DataFixture</span><span class="p">.</span><span class="nx">generate</span><span class="p">(</span><span class="nx">template</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="c1">// possible output</span>
+<span class="p">{</span>
+    <span class="nx">like</span><span class="o">:</span> <span class="mf">12.69</span>
+<span class="p">}</span>
+
+</pre>
+</div>
+
+
+<h2>Generate a string from a defined set of values</h2>
+
+<div class="highlight">
+<pre><span class="kd">var</span> <span class="nx">template</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">names</span><span class="o">:</span> <span class="p">[</span><span class="s2">"Ian"</span><span class="p">,</span><span class="s2">"Polo"</span><span class="p">,</span> <span class="s2">"Oscar"</span><span class="p">,</span> <span class="s2">"Fabien"</span><span class="p">,</span> <span class="s2">"Rafael"</span><span class="p">]</span> <span class="cm">/* Create string with any of the values from the array */</span>
+<span class="p">};</span>
+<span class="nx">DataFixture</span><span class="p">.</span><span class="nx">generate</span><span class="p">(</span><span class="nx">template</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="c1">// possible output</span>
+<span class="p">{</span>
+    <span class="nx">names</span><span class="o">:</span> <span class="s2">"Rafael"</span>
+<span class="p">}</span>
+
+</pre>
+</div>
+
+
+<h2>Generate a string from a defined set of values with mixed types</h2>
+
+<div class="highlight">
+<pre><span class="kd">var</span> <span class="nx">template</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">names</span><span class="o">:</span> <span class="p">[</span><span class="s2">"Ian"</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="mf">10.4</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="s2">"Andros"</span><span class="p">]</span> <span class="cm">/* Create string with any of the values from the array */</span>
+<span class="p">};</span>
+<span class="nx">DataFixture</span><span class="p">.</span><span class="nx">generate</span><span class="p">(</span><span class="nx">template</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="c1">// possible output</span>
+<span class="p">{</span>
+    <span class="nx">names</span><span class="o">:</span> <span class="mf">10.4</span>
+<span class="p">}</span>
+
+</pre>
+</div>
+
+
+<h2>One level template</h2>
+
+<div class="highlight">
+<pre><span class="kd">var</span> <span class="nx">template</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">values</span><span class="o">:</span> <span class="s2">"0...100:2"</span> <span class="cm">/* generate a number between 0 an 100, with 2 decimals */</span>
+    <span class="nx">names</span><span class="o">:</span> <span class="p">[</span><span class="s2">"Ian"</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="mf">10.4</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="s2">"Andros"</span><span class="p">]</span> <span class="cm">/* Create string with any of the values from the array */</span>
+<span class="p">};</span>
+<span class="nx">DataFixture</span><span class="p">.</span><span class="nx">generate</span><span class="p">(</span><span class="nx">template</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="c1">// possible output</span>
+<span class="p">{</span>
+    <span class="nx">value</span><span class="o">:</span> <span class="mf">45.67</span><span class="p">,</span>
+    <span class="nx">names</span><span class="o">:</span> <span class="s2">"Andros"</span>
+<span class="p">}</span>
+
+</pre>
+</div>
+
+
+<h2>Nested levels template</h2>
+
+<div class="highlight">
+<pre><span class="kd">var</span> <span class="nx">template</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">values</span><span class="o">:</span> <span class="s2">"0...100:2"</span><span class="p">,</span> 
+    <span class="nx">names</span><span class="o">:</span> <span class="p">[</span><span class="s2">"Ian"</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="mf">10.4</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="s2">"Andros"</span><span class="p">],</span> 
+    <span class="nx">complex</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">PO</span><span class="o">:</span><span class="s2">"20000...30000"</span><span class="p">,</span>
+        <span class="nx">country</span><span class="o">:</span> <span class="p">[</span><span class="s2">"Mexico"</span><span class="p">,</span> <span class="s2">"Canada"</span><span class="p">,</span> <span class="s2">"US"</span><span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+<span class="nx">DataFixture</span><span class="p">.</span><span class="nx">generate</span><span class="p">(</span><span class="nx">template</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="c1">// possible output</span>
+<span class="p">{</span>
+    <span class="nx">names</span><span class="o">:</span> <span class="mf">10.4</span><span class="p">,</span>
+    <span class="nx">values</span><span class="o">:</span> <span class="mf">13.78</span><span class="p">,</span>
+    <span class="nx">complex</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">PO</span><span class="o">:</span> <span class="mi">27882</span><span class="p">,</span>
+        <span class="nx">country</span><span class="o">:</span> <span class="s2">"Canada"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</pre>
+</div>
+
+
+<p>enjoy!</p>
+
+<p><strong>datafixture.js</strong> is developed by <a href="https://github.com/acatl">Acatl Pacheco</a>.
+Linkedin Profile: <a href="http://www.linkedin.com/in/acatl">http://www.linkedin.com/in/acatl</a>.</p>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+  </body>
+</html>
