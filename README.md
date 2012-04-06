@@ -14,7 +14,7 @@ is an object with at least one property.
 ## numberOfResults
 is the number of results we want to be generated
 
-if `numberOfResults` is == 0 it possible output an object. if > 0 it possible output an array of objects.
+if `numberOfResults` is == 0 it outputs an object. if > 0 it outputs an array of objects.
 
 # Examples
 
