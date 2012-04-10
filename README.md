@@ -2,7 +2,7 @@
 
 Generates random data based on a defined template model.
 
-jsfiddle example: 
+**jsfiddle example:**
 
 [http://jsfiddle.net/acatl/QC3Av/](http://jsfiddle.net/acatl/QC3Av/)
 
@@ -12,13 +12,11 @@ jsfiddle example:
 DataFixture.generate(templateObject, numberOfResults);
 ````
 
-## templateObject
-is an object with at least one property.
+`templateObject`
+an object with at least one property.
 
-## numberOfResults
-is the number of results we want to be generated
-
-if `numberOfResults` is == 0 it outputs an object. if > 0 it outputs an array of objects.
+`numberOfResults`
+number of results we want to be generated, if == 0 it outputs an object. if > 0 it outputs an array of objects.
 
 # Examples
 
@@ -168,7 +166,7 @@ var df = DataFixture.generate({
   { coordinates: '7:8' } ]
 ```
 
-enjoy!
+**enjoy!**
 
 All feedback is welcomed
 
