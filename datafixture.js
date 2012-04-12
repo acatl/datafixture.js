@@ -8,7 +8,8 @@
 
 var DataFixture = (function() {
 	var _rows = 20,
-		_template = null;
+		_template = null,
+		_lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque risus turpis, rutrum a mattis a, venenatis ultricies orci. Quisque ultrices arcu sed ipsum tempor nec vehicula massa dictum. Fusce risus orci, adipiscing in consectetur in, gravida eget purus. Praesent elementum auctor elit, et laoreet elit tincidunt a. Vestibulum porta mauris eget purus porttitor viverra vel sed magna. Phasellus et suscipit nunc. Vestibulum sit amet massa quam. Aliquam bibendum placerat orci vitae dictum. Duis et leo pulvinar est iaculis ullamcorper non vitae quam. Donec dictum, odio vitae dignissim consectetur, ante erat auctor quam, et venenatis ligula nunc vel dolor. Phasellus mauris sem, dapibus eu pretium ut, sagittis id orci. Cras pretium, magna gravida accumsan commodo, sem libero porta risus, sit amet tristique felis ipsum varius metus. Duis pharetra nulla sed risus auctor quis scelerisque nulla accumsan. Proin sodales condimentum pretium. Praesent in nulla vel tellus pharetra dignissim id id diam.";
 
 	function generate(template, numberOfRows) {
 
@@ -37,6 +38,19 @@ var DataFixture = (function() {
 		return dataSet;
 	};
 
+	function _parseRange(expression) {
+		tokens = [expression, 0];
+		if (expression.indexOf(":") != -1) {
+			tokens = expression.split(":");
+		}
+		var ranges = tokens[0].split("...");
+		return {
+			base: parseFloat(ranges[0]),
+			limit: parseFloat(ranges[1]),
+			decimals: parseFloat(tokens[1])
+		};
+	};
+
 	function _parseColumn(columnName, columnValue) {
 		var tokens = null;
 
@@ -45,14 +59,21 @@ var DataFixture = (function() {
 		}
 
 		if (typeof columnValue == "string") {
-			if (columnValue.indexOf("...") != -1) {
-				//range
-				tokens = [columnValue, 0];
+			
+			if (columnValue.indexOf("lorem") != -1) {
+				tokens = [columnValue, "1...10"];
 				if (columnValue.indexOf(":") != -1) {
 					tokens = columnValue.split(":");
 				}
-				var ranges = tokens[0].split("...");
-				return parseFloat(getRandom(parseFloat(ranges[0]), parseFloat(ranges[1]), tokens[1]));
+				var ranges = _parseRange(tokens[1]);
+				var words = getRandom(ranges.base, ranges.limit, 0);
+				var substrings = _lorem.split(" ").slice(0,words);
+			    return substrings.join(" ");
+			}
+
+			if (columnValue.indexOf("...") != -1) {
+				var range = _parseRange(columnValue);
+				return parseFloat(getRandom(range.base, range.limit, range.decimals));
 			}
 		}
 
@@ -85,6 +106,8 @@ var DataFixture = (function() {
 	};
 
 	//Ozipi's additions https://github.com/ozipi
+
+
 	function getDatesRandomData(itemsNumber) {
 		var data = [];
 		var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Ags', 'Sep', 'Oct', 'Nov', 'Dic'];
@@ -97,8 +120,10 @@ var DataFixture = (function() {
 		}
 		return data;
 	};
-	
+
 	//Ozipi's additions https://github.com/ozipi
+
+
 	function getRandomArrayValues(arrayNumber, base, limit) {
 		var values = [];
 		for (var i = 0; i < arrayNumber; i++) {
@@ -116,4 +141,3 @@ var DataFixture = (function() {
 	};
 
 })();
-

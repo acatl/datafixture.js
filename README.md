@@ -12,15 +12,15 @@ Generates random data based on a defined template model.
 DataFixture.generate(templateObject, numberOfResults);
 ````
 
-`templateObject`
-an object with at least one property.
+**templateObject**
+is an object with at least one property.
 
-`numberOfResults`
-number of results we want to be generated, if == 0 it outputs an object. if > 0 it outputs an array of objects.
+**numberOfResults**
+is the number of results we want to be generated, if `numberOfResults` is == 0 it outputs an object. if > 0 it outputs an array of objects.
 
 # Examples
 
-## Generate a object with a randomly set numeric property
+**Generate an object with a randomly set numeric property**
 
 ```js
 var template = {
@@ -35,7 +35,7 @@ DataFixture.generate(template, 0);
 
 ```
 
-## Generate an Array with a randomly set numeric property
+**Generate an Array with a randomly set numeric property**
 
 ```js
 var template = {
@@ -56,7 +56,7 @@ DataFixture.generate(template, 20); /* second parameter indicates the number of 
 ```
 
 
-## Generate numbers with decimals
+**Generate numbers with decimals**
 
 ```js
 var template = {
@@ -71,7 +71,7 @@ DataFixture.generate(template, 0);
 
 ```
 
-## Generate a string from a defined set of values 
+**Generate a string from a defined set of values**
 
 ```js
 var template = {
@@ -86,7 +86,7 @@ DataFixture.generate(template, 0);
 
 ```
 
-## Generate a string from a defined set of values with mixed types 
+**Generate a string from a defined set of values with mixed types**
 
 ```js
 var template = {
@@ -101,7 +101,7 @@ DataFixture.generate(template, 0);
 
 ```
 
-## One level template
+**One level template**
 
 ```js
 var template = {
@@ -119,7 +119,7 @@ DataFixture.generate(template, 0);
 ```
 
 
-## Nested levels template
+**Nested levels template**
 
 ```js
 var template = {
@@ -144,7 +144,7 @@ DataFixture.generate(template, 0);
 
 ```
 
-## Values of properties can also be functions
+**Values of properties can also be functions**
 
 ```js
 var df = DataFixture.generate({
@@ -164,6 +164,27 @@ var df = DataFixture.generate({
   { coordinates: '12:9' },
   { coordinates: '15:2' },
   { coordinates: '7:8' } ]
+```
+**Create Lorem Ipsum paragraphs with random lengths**
+
+```js
+var x = DataFixture.generate({
+	// you may define the range of possible words to use
+	// this case: from 1 to 3 words, if omitted it will by default "1...10"
+	"lorem": "lorem:1...3"
+}, 10);
+
+//output
+[ { lorem: 'Lorem' },
+  { lorem: 'Lorem ipsum' },
+  { lorem: 'Lorem ipsum' },
+  { lorem: 'Lorem ipsum' },
+  { lorem: 'Lorem ipsum dolor' },
+  { lorem: 'Lorem ipsum' },
+  { lorem: 'Lorem' },
+  { lorem: 'Lorem ipsum dolor' },
+  { lorem: 'Lorem' },
+  { lorem: 'Lorem ipsum' } ]
 ```
 
 **enjoy!**
