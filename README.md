@@ -144,6 +144,36 @@ DataFixture.generate(template, 0);
 
 ```
 
+**Nested template with more than one result**
+
+```js
+var template = {
+	values: "0...100:2", 
+	names: ["Ian",2, 10.4, true, "Andros"], 
+	complex: {
+		// _rows_ is a reserved property name 
+		_rows_ : 4, 
+		// _template_ is a reserved property name 
+		_template_ : { 
+			PO:"20000...30000",
+			country: ["Mexico", "Canada", "US"]
+		}
+	}
+};
+DataFixture.generate(template, 0);
+
+// possible output
+{ values: 97.62,
+  names: 10.4,
+  complex: 
+   [ { PO: 22468, country: 'US' },
+     { PO: 27431, country: 'Canada' },
+     { PO: 20893, country: 'Canada' },
+     { PO: 25644, country: 'Canada' } ] 
+}
+
+```
+
 **Values of properties can also be functions**
 
 ```js

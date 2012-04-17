@@ -85,10 +85,10 @@ var DataFixture = (function() {
 			if (columnValue.hasOwnProperty("length")) {
 				return columnValue[getRandom(0, columnValue.length - 1)];
 			} else {
-				tokens = [columnValue, _rows];
-				if (columnValue.hasOwnProperty("rows") && columnValue.hasOwnProperty("template")) {
-					tokens[0] = columnValue.template;
-					tokens[1] = columnValue.rows;
+				tokens = [columnValue, 0];
+				if (columnValue.hasOwnProperty("_rows_") && columnValue.hasOwnProperty("_template_")) {
+					tokens[0] = columnValue._template_;
+					tokens[1] = columnValue._rows_;
 				}
 				return generate(tokens[0], tokens[1]);
 			}
