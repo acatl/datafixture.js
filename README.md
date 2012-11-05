@@ -106,7 +106,7 @@ DataFixture.generate(template, 0);
 ```js
 var template = {
 	score: "0...100:2" /* generate a number between 0 an 100, with 2 decimals */
-	names: ["Paula, "Darek", "Ian", "Monica", "Andros", "Kenji"] /* Create string with any of the values from the array */
+	names: ["Paula", "Darek", "Ian", "Monica", "Andros", "Kenji"] /* Create string with any of the values from the array */
 };
 DataFixture.generate(template, 4);
 
