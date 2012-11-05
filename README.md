@@ -105,16 +105,20 @@ DataFixture.generate(template, 0);
 
 ```js
 var template = {
-	values: "0...100:2" /* generate a number between 0 an 100, with 2 decimals */
-	names: ["Ian",2, 10.4, true, "Andros"] /* Create string with any of the values from the array */
+	score: "0...100:2" /* generate a number between 0 an 100, with 2 decimals */
+	names: ["Paula, "Darek", "Ian", "Monica", "Andros", "Kenji"] /* Create string with any of the values from the array */
 };
-DataFixture.generate(template, 0);
+DataFixture.generate(template, 4);
 
 // possible output
-{
-	value: 45.67,
-	names: "Andros"
-}
+[
+	{score: 45.67,	names: "Andros"},
+	{score: 5.73,	names: "Ian"},
+	{score: 34.45,	names: "Paula"},
+	{score: 53.76,	names: "Darek"},
+	{score: 99.28,	names: "Monica"},
+	{score: 0.12,	names: "Kenji"}
+]
 
 ```
 
