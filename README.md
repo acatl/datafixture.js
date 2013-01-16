@@ -229,7 +229,7 @@ note: currently only support string, lorem, or numeric ranges
 ```js
 var x = DataFixture.generate({
     // use pipes | to separate each value
-    "time": ""
+    "time": "1...24|:|0...59|:|0...59"
 }, 10);
 
 //output
