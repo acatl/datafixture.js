@@ -221,8 +221,28 @@ var x = DataFixture.generate({
   { lorem: 'Lorem ipsum' } ]
 ```
 
+
+**Multiple values on a string**
+
+note: currently only support string, lorem, or numeric ranges
+
+```js
+var x = DataFixture.generate({
+    // use pipes | to separate each value
+    "time": ""
+}, 10);
+
+//output
+[ { time: '15:53:36' },
+  { time: '13:54:7' },
+  { time: '4:37:46' }
+]
+```
+
 **enjoy!**
 
 All feedback is welcomed
+
+
 
 
