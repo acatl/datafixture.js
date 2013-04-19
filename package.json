@@ -1,4 +1,10 @@
 {
-    "name" : "DataFixture",
-    "main" : "datafixture.js"
+  "name": "DataFixture",
+  "main": "datafixture.js",
+  "version": "0.1.0",
+  "author": "Acatl Pacheco <acatl.pacheco@gmail.com>",
+  "license": "Licensed under the MIT License",
+  "devDependencies": {
+    "grunt-contrib-uglify": "~0.2.0"
+  }
 }

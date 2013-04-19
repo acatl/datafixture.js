@@ -1,174 +1,283 @@
 /*
- * datafixture.js
- *
- * Copyright 2012, Acatl Pacheco
- * Licensed under the MIT License.
- *
- */
+# * datafixture.js
+# *
+# * Copyright 2012, Acatl Pacheco
+# * Licensed under the MIT License.
+# *
+*/
 
-var DataFixture = (function() {
-    var _rows = 20,
-        _template = null,
-        _lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque risus turpis, rutrum a mattis a, venenatis ultricies orci. Quisque ultrices arcu sed ipsum tempor nec vehicula massa dictum. Fusce risus orci, adipiscing in consectetur in, gravida eget purus. Praesent elementum auctor elit, et laoreet elit tincidunt a. Vestibulum porta mauris eget purus porttitor viverra vel sed magna. Phasellus et suscipit nunc. Vestibulum sit amet massa quam. Aliquam bibendum placerat orci vitae dictum. Duis et leo pulvinar est iaculis ullamcorper non vitae quam. Donec dictum, odio vitae dignissim consectetur, ante erat auctor quam, et venenatis ligula nunc vel dolor. Phasellus mauris sem, dapibus eu pretium ut, sagittis id orci. Cras pretium, magna gravida accumsan commodo, sem libero porta risus, sit amet tristique felis ipsum varius metus. Duis pharetra nulla sed risus auctor quis scelerisque nulla accumsan. Proin sodales condimentum pretium. Praesent in nulla vel tellus pharetra dignissim id id diam.";
 
-    function generate(template, numberOfRows) {
+(function() {
+  var DataFixturePlugin;
 
-        var dataSet = [],
-            row = {},
-            column;
+  DataFixturePlugin = (function() {
+    var generate, getABC, getDatesRandomData, getGUID, getRandom, getRandomArrayValues, parseTokens, _generateParagraph, _lorem, _loremList, _parseABC, _parseColumn, _parseLorem, _parsePLorem, _parseRange, _parseRangeValue, _parseValue, _rows, _template;
 
-        _rows = numberOfRows;
+    _rows = 20;
+    _template = null;
+    _lorem = "lorem ipsum dolor sit amet consectetur adipiscing elit quisque risus turpis rutrum a mattis a venenatis ultricies orci quisque ultrices arcu sed ipsum tempor nec vehicula massa dictum fusce risus orci adipiscing in consectetur in gravida eget purus praesent elementum auctor elit et laoreet elit tincidunt a vestibulum porta mauris eget purus porttitor viverra vel sed magna phasellus et suscipit nunc vestibulum sit amet massa quam aliquam bibendum placerat orci vitae dictum duis et leo pulvinar est iaculis ullamcorper non vitae quam donec dictum odio vitae dignissim consectetur ante erat auctor quam et venenatis ligula nunc vel dolor phasellus mauris sem dapibus eu pretium ut sagittis id orci cras pretium magna gravida accumsan commodo sem libero porta risus sit amet tristique felis ipsum varius metus duis pharetra nulla sed risus auctor quis scelerisque nulla accumsan proin sodales condimentum pretium praesent in nulla vel tellus pharetra dignissim id id diam";
+    _loremList = _lorem.split(" ");
+    generate = function(template, numberOfRows) {
+      var column, dataSet, i, row;
 
-        if (numberOfRows == 0) {
-            row = {};
-            for (column in template) {
-                row[column] = _parseColumn(column, template[column]);
-            }
-
-            return row;
+      dataSet = [];
+      row = {};
+      column = void 0;
+      numberOfRows = template["#"] || numberOfRows;
+      numberOfRows = typeof numberOfRows === "string" ? _parseRangeValue(numberOfRows) : numberOfRows;
+      if (numberOfRows === 0) {
+        row = {};
+        for (column in template) {
+          if (column !== "#") {
+            row[column] = _parseColumn(column, template[column]);
+          }
         }
-
-        for (var i = 0; i < numberOfRows; i++) {
-            row = {};
-            for (column in template) {
-                row[column] = _parseColumn(column, template[column]);
-            }
-            dataSet.push(row);
+        return row;
+      }
+      i = 0;
+      while (i < numberOfRows) {
+        row = {};
+        for (column in template) {
+          if (column !== "#") {
+            row[column] = _parseColumn(column, template[column]);
+          }
         }
-        return dataSet;
+        dataSet.push(row);
+        i++;
+      }
+      return dataSet;
     };
+    _parseRange = function(expression) {
+      var ranges, tokens;
 
-    function _parseRange(expression) {
-        tokens = [expression, 0];
-        if (expression.indexOf(":") != -1) {
-            tokens = expression.split(":");
-        }
-        var ranges = tokens[0].split("...");
-        return {
-            base: parseFloat(ranges[0]),
-            limit: parseFloat(ranges[1]),
-            decimals: parseFloat(tokens[1])
-        };
+      tokens = parseTokens(expression, [0, 0]);
+      ranges = tokens[0].split("...");
+      return [parseFloat(ranges[0]), parseFloat(ranges[1]), parseFloat(tokens[1])];
     };
+    _parseRangeValue = function(columnValue) {
+      var range;
 
-    function _parseLorem(columnValue) {
-        var tokens = [columnValue, "1...10"];
-        if (columnValue.indexOf(":") != -1) {
-            tokens = columnValue.split(":");
+      range = _parseRange(columnValue);
+      return parseFloat(getRandom(range[0], range[1], range[2]));
+    };
+    _parseLorem = function(columnValue) {
+      var tokens, words;
+
+      tokens = parseTokens(columnValue, "1...10");
+      if (columnValue.indexOf(":") !== -1) {
+        tokens = columnValue.split(":");
+      }
+      words = _parseRangeValue(tokens[1]);
+      return _generateParagraph(words);
+    };
+    _parsePLorem = function(columnValue) {
+      var output, p, paragraphs, tokens, wordRanges, words;
+
+      tokens = parseTokens(columnValue, ["1...10", "10...20"]);
+      paragraphs = _parseRangeValue(tokens[1]);
+      wordRanges = tokens[2];
+      words = void 0;
+      output = "";
+      p = 0;
+      while (p < paragraphs) {
+        words = _parseRangeValue(wordRanges);
+        output += _generateParagraph(words) + "." + (p < (paragraphs - 1) ? "\n" : "");
+        p++;
+      }
+      return output;
+    };
+    _generateParagraph = function(words) {
+      var i, output;
+
+      output = "";
+      i = 0;
+      while (i < words) {
+        output += _loremList[getRandom(0, _loremList.length, 0)] + (i < (words - 1) ? " " : "");
+        i++;
+      }
+      return output;
+    };
+    _parseABC = function(columnValue) {
+      var tokens;
+
+      tokens = parseTokens(columnValue, 3);
+      return getABC(parseInt(tokens[1], 0));
+    };
+    _parseValue = function(columnValue) {
+      var columnTokens, i, length, output, token;
+
+      columnTokens = columnValue.split("|");
+      output = [];
+      i = 0;
+      length = columnTokens.length;
+      while (i < length) {
+        token = columnTokens[i];
+        i++;
+        if (token.indexOf("ABC") !== -1) {
+          output.push(_parseABC(token));
+          continue;
         }
-        var ranges = _parseRange(tokens[1]);
-        var words = getRandom(ranges.base, ranges.limit, 0);
-        var substrings = _lorem.split(" ").slice(0,words);
-        return substrings.join(" ");
-    }
-
-    function _parseRangeValue(columnValue) {
-        var range = _parseRange(columnValue);
-        return parseFloat(getRandom(range.base, range.limit, range.decimals));
-    }
-
-    function _parseValue(columnValue) {
-        var columnTokens = columnValue.split("|");
-        output = []
-        for(var i=0, length=columnTokens.length; i<length; i++) {
-            token = columnTokens[i]
-            if (token.indexOf("lorem") != -1) {
-                output.push(_parseLorem(token))
-                continue;
-            }
-
-            if (token.indexOf("...") != -1) {
-                output.push(_parseRangeValue(token))
-                continue;
-            }
-
-            output.push(token)
+        if (token.indexOf("plorem") !== -1) {
+          output.push(_parsePLorem(token));
+          continue;
         }
-
-
-        return output.join("")
-
-    }
-
-    function _parseColumn(columnName, columnValue) {
-        var tokens = null;
-
-        if (typeof columnValue == "number") {
-            return columnValue;
+        if (token.indexOf("lorem") !== -1) {
+          output.push(_parseLorem(token));
+          continue;
         }
-
-        if (typeof columnValue == "string") {
-            return _parseValue(columnValue)
+        if (token.indexOf("...") !== -1) {
+          output.push(_parseRangeValue(token));
+          continue;
         }
-
-        if (typeof columnValue == "function") {
-            return columnValue();
+        if (token === "GUID") {
+          output.push(getGUID());
+          continue;
         }
+        output.push(token);
+      }
+      if (output.length === 1) {
+        return output[0];
+      } else {
+        return output.join("");
+      }
+    };
+    _parseColumn = function(columnName, columnValue) {
+      var tokens;
 
-        if (typeof columnValue == "object") {
-            if (columnValue.hasOwnProperty("length")) {
-                return columnValue[getRandom(0, columnValue.length - 1)];
-            } else {
-                tokens = [columnValue, 0];
-                if (columnValue.hasOwnProperty("_rows_") && columnValue.hasOwnProperty("_template_")) {
-                    tokens[0] = columnValue._template_;
-                    tokens[1] = columnValue._rows_;
-                }
-                return generate(tokens[0], tokens[1]);
-            }
-        }
-
+      tokens = null;
+      if (typeof columnValue === "number") {
         return columnValue;
-    };
-
-    //function to get random number upto m
-
-    function getRandom(base, limit) {
-        var floatVal = arguments.length == 3 ? arguments[2] : 0;
-        var rndVal = base + (Math.random() * (limit - base));
-        return floatVal == 0 ? Math.round(rndVal) : Number(rndVal.toFixed(floatVal));
-    };
-
-    //Ozipi's additions https://github.com/ozipi
-
-
-    function getDatesRandomData(itemsNumber) {
-        var data = [];
-        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Ags', 'Sep', 'Oct', 'Nov', 'Dic'];
-        var currentDate = new Date();
-
-        for (var i = 0; i < itemsNumber; i++) {
-            var nextDate = currentDate.getDate() + i;
-            var dateString = months[currentDate.getMonth()] + ' ' + nextDate + ',' + currentDate.getFullYear();
-            data.push(dateString);
+      }
+      if (typeof columnValue === "string") {
+        return _parseValue(columnValue);
+      }
+      if (typeof columnValue === "function") {
+        return columnValue();
+      }
+      if (typeof columnValue === "object") {
+        if (columnValue.hasOwnProperty("length")) {
+          return columnValue[getRandom(0, columnValue.length - 1)];
+        } else {
+          tokens = [columnValue, 0];
+          if (columnValue.hasOwnProperty("_rows_") && columnValue.hasOwnProperty("_template_")) {
+            tokens[0] = columnValue._template_;
+            tokens[1] = columnValue._rows_;
+          }
+          return generate(tokens[0], tokens[1]);
         }
-        return data;
+      }
+      return columnValue;
     };
+    parseTokens = function(value, defaultval) {
+      var defaultTokens, i, tokens, val, _i, _len;
 
-    //Ozipi's additions https://github.com/ozipi
-
-
-    function getRandomArrayValues(arrayNumber, base, limit) {
-        var values = [];
-        for (var i = 0; i < arrayNumber; i++) {
-            values.push(getRandom(base, limit));
-        };
-
-        return values;
+      tokens = value.split(":");
+      if (!defaultval.hasOwnProperty("length")) {
+        defaultval = [defaultval];
+      }
+      defaultTokens = [value].concat(defaultval);
+      for (i = _i = 0, _len = defaultTokens.length; _i < _len; i = ++_i) {
+        val = defaultTokens[i];
+        if (typeof tokens[i] === "undefined") {
+          tokens[i] = val;
+        }
+      }
+      return tokens;
     };
+    getRandom = function(base, limit) {
+      var floatVal, rndVal;
 
+      floatVal = (arguments.length === 3 ? arguments[2] : 0);
+      if (isNaN(limit)) {
+        limit = base + 0.9;
+      }
+      rndVal = base + (Math.random() * (limit - base));
+      if (floatVal === 0) {
+        return Math.round(rndVal);
+      } else {
+        return Number(rndVal.toFixed(floatVal));
+      }
+    };
+    getGUID = function() {
+      var S4;
+
+      S4 = function() {
+        return Math.floor(Math.random() * 0x10000).toString(16);
+      };
+      return S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4();
+    };
+    getABC = function(wordLength) {
+      var abc, i, output;
+
+      abc = "abcdefghijkmlnopqrstuvwxyz".split("");
+      output = "";
+      i = 0;
+      while (i < wordLength) {
+        output += abc[getRandom(0, abc.length - 1, 0)];
+        i++;
+      }
+      return output;
+    };
+    getDatesRandomData = function(itemsNumber) {
+      var currentDate, data, dateString, i, months, nextDate;
+
+      data = [];
+      months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Ags", "Sep", "Oct", "Nov", "Dic"];
+      currentDate = new Date();
+      i = 0;
+      while (i < itemsNumber) {
+        nextDate = currentDate.getDate() + i;
+        dateString = months[currentDate.getMonth()] + " " + nextDate + "," + currentDate.getFullYear();
+        data.push(dateString);
+        i++;
+      }
+      return data;
+    };
+    getRandomArrayValues = function(arrayNumber, base, limit) {
+      var i, values;
+
+      values = [];
+      i = 0;
+      while (i < arrayNumber) {
+        values.push(getRandom(base, limit));
+        i++;
+      }
+      return values;
+    };
     return {
-        generate: generate,
-        getRandom: getRandom,
-        getDatesRandomData: getDatesRandomData,
-        getRandomArrayValues: getRandomArrayValues
+      generate: generate,
+      getRandom: getRandom,
+      getDatesRandomData: getDatesRandomData,
+      getRandomArrayValues: getRandomArrayValues
     };
+  })();
 
-})();
+  if (window) {
+    window.DataFixture = DataFixturePlugin;
+  }
 
-// nodejs module
-if(typeof exports != "undefined") {
-	exports.generate = DataFixture.generate	
-}
+  if (typeof exports !== "undefined") {
+    exports.generate = DataFixture.generate;
+  }
+
+  /*
+  
+  # test
+  r = DataFixture.generate(
+      "#":"0...10"
+      n:1
+      nn:"1...10000"
+      nnn:"1...10000:2"
+      l:"lorem"
+      p:"plorem:1...10:1...2"
+      xx:"1|-|ABC:4|-|lorem:1...3"
+      obj:
+          "#":3
+          name: "lorem:1..3"
+  )
+  
+  console.log r
+  */
 
 
+}).call(this);

@@ -155,9 +155,8 @@ var template = {
 	values: "0...100:2", 
 	names: ["Ian",2, 10.4, true, "Andros"], 
 	complex: {
-		// _rows_ is a reserved property name 
-		_rows_ : 4, 
-		// _template_ is a reserved property name 
+        // '#' is a reserved property name, indicates number of instances
+		'#': '1...3', // this will generate from 1 to 3 array elements
 		_template_ : { 
 			PO:"20000...30000",
 			country: ["Mexico", "Canada", "US"]
