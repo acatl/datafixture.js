@@ -17,7 +17,7 @@ module.exports = function(grunt) {
             options: {
                 banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
                         '<%= grunt.template.today("yyyy-mm-dd") %> | ' +
-                        '(c) 2011, <%= grunt.template.today("yyyy") %>, ' +
+                        '(c) 2011 - <%= grunt.template.today("yyyy") %>, ' +
                         'By: <%= pkg.author %> | <%= pkg.license %> */\n'
             },
             main: {
