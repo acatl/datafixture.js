@@ -2,9 +2,8 @@
 
 Generates random data based on a defined template model.
 
-**jsfiddle example:**
-
-[http://jsfiddle.net/acatl/QC3Av/](http://jsfiddle.net/acatl/QC3Av/)
+**jsfiddle example implementing all of its features:**
+[http://jsfiddle.net/acatl/fmvEj/](http://jsfiddle.net/acatl/fmvEj/)
 
 # Method: DataFixture.generate
 
