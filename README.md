@@ -3,7 +3,12 @@
 Generates random data based on a defined template model.
 
 **jsfiddle example implementing all of its features:**
+
 [http://jsfiddle.net/acatl/fmvEj/](http://jsfiddle.net/acatl/fmvEj/)
+
+**Jasmine tests results**
+
+[http://jsfiddle.net/acatl/D2vmE/embedded/result/](http://jsfiddle.net/acatl/D2vmE/embedded/result/)
 
 # Method: DataFixture.generate
 
