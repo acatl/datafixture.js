@@ -17,7 +17,8 @@ DataFixturePlugin = do ->
         dataSet = []
         row = {}
         column = undefined
-        numberOfRows = template["#"] or numberOfRows        
+        numberOfRows = template["#"] or numberOfRows or 0
+        numberOfRows = 0 if numberOfRows < 0
         numberOfRows = if typeof numberOfRows is "string" then _parseRangeValue(numberOfRows) else numberOfRows
         if numberOfRows is 0
             row = {}
@@ -73,7 +74,7 @@ DataFixturePlugin = do ->
         i = 0
 
         while i < words
-            output += _loremList[getRandom(0, _loremList.length, 0)] + ((if i < (words - 1) then " " else ""))
+            output += _loremList[getRandom(0, _loremList.length-1, 0)] + ((if i < (words - 1) then " " else ""))
             i++
         output
     _parseABC = (columnValue) ->
@@ -143,11 +144,13 @@ DataFixturePlugin = do ->
     
     # credit: http://note19.com/2007/05/27/javascript-guid-generator/
     getGUID = ->
-        S4 = ->
+        s4 = ->
             # 65536 
-            Math.floor(Math.random() * 0x10000).toString 16
+            Math.floor((1 + Math.random()) * 0x10000)
+             .toString(16)
+             .substring(1)
 
-        S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4()
+        s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4()
     getABC = (wordLength) ->
         abc = ("abcdefghijkmlnopqrstuvwxyz").split("")
         output = ""

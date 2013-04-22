@@ -23,7 +23,10 @@
       dataSet = [];
       row = {};
       column = void 0;
-      numberOfRows = template["#"] || numberOfRows;
+      numberOfRows = template["#"] || numberOfRows || 0;
+      if (numberOfRows < 0) {
+        numberOfRows = 0;
+      }
       numberOfRows = typeof numberOfRows === "string" ? _parseRangeValue(numberOfRows) : numberOfRows;
       if (numberOfRows === 0) {
         row = {};
@@ -92,7 +95,7 @@
       output = "";
       i = 0;
       while (i < words) {
-        output += _loremList[getRandom(0, _loremList.length, 0)] + (i < (words - 1) ? " " : "");
+        output += _loremList[getRandom(0, _loremList.length - 1, 0)] + (i < (words - 1) ? " " : "");
         i++;
       }
       return output;
@@ -199,12 +202,12 @@
       }
     };
     getGUID = function() {
-      var S4;
+      var s4;
 
-      S4 = function() {
-        return Math.floor(Math.random() * 0x10000).toString(16);
+      s4 = function() {
+        return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
       };
-      return S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4();
+      return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
     };
     getABC = function(wordLength) {
       var abc, i, output;
