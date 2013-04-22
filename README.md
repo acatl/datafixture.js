@@ -157,10 +157,8 @@ var template = {
 	complex: {
         // '#' is a reserved property name, indicates number of instances
 		'#': '1...3', // this will generate from 1 to 3 array elements
-		_template_ : { 
-			PO:"20000...30000",
-			country: ["Mexico", "Canada", "US"]
-		}
+		PO:"20000...30000",
+		country: ["Mexico", "Canada", "US"]
 	}
 };
 DataFixture.generate(template, 0);
