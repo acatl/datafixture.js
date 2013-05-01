@@ -14,7 +14,7 @@ Generates random data based on a defined template model.
 
 ```js
 DataFixture.generate(templateObject, numberOfResults);
-````
+```
 
 **templateObject**
 is an object with at least one property.
