@@ -191,11 +191,16 @@ DataFixturePlugin = do ->
     getDatesRandomData: getDatesRandomData
     getRandomArrayValues: getRandomArrayValues
 
-# web
-window.DataFixture = DataFixturePlugin if window
 
-# nodejs module
-exports.generate = DataFixture.generate  unless typeof exports is "undefined"
+# Establish the root object, `window` in the browser, or `global` on the server.
+root = this
+
+if typeof module isnt "undefined" and typeof module.exports isnt "undefined"
+    # "NODEJS"
+    module.exports = DataFixturePlugin
+else
+    # "BROWSER"
+    root.DataFixture = DataFixturePlugin
 
 ###
 

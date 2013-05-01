@@ -8,7 +8,7 @@
 
 
 (function() {
-  var DataFixturePlugin;
+  var DataFixturePlugin, root;
 
   DataFixturePlugin = (function() {
     var generate, getABC, getDatesRandomData, getGUID, getRandom, getRandomArrayValues, parseTokens, _generateParagraph, _lorem, _loremList, _parseABC, _parseColumn, _parseLorem, _parsePLorem, _parseRange, _parseRangeValue, _parseValue, _rows, _template;
@@ -255,12 +255,12 @@
     };
   })();
 
-  if (window) {
-    window.DataFixture = DataFixturePlugin;
-  }
+  root = this;
 
-  if (typeof exports !== "undefined") {
-    exports.generate = DataFixture.generate;
+  if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
+    module.exports = DataFixturePlugin;
+  } else {
+    root.DataFixture = DataFixturePlugin;
   }
 
   /*
