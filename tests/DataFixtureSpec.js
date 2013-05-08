@@ -7,6 +7,29 @@ describe("Datafixture", function() {
         expect(DataFixture).not.toBeUndefined();
     });
 
+    describe("when passing a string pattern as your template", function() {
+        it("should return an number if only a number was asked for", function () {
+            fixture = DataFixture.generate('2...20');
+            expect(fixture).not.toBeLessThan(1);
+            expect(fixture).not.toBeGreaterThan(21);
+        });
+
+        it("accept '|' for concatenation", function () {
+            fixture = DataFixture.generate('some|text| |here');
+            expect(fixture).toMatch('sometext here');
+        });
+
+        it("should be able to contactenate pattern for ranges", function () {
+            fixture = DataFixture.generate("value is|:|1...5");
+            var words = fixture.split(':');
+            var number = parseInt(words[1],10); 
+            expect(words[0]).toEqual('value is');
+            expect(number).toBeGreaterThan(0);
+            expect(number).toBeLessThan(6);
+        });
+    });
+
+
     describe("when setting fixture count", function() {
         it("should return an object if count parameter is 0", function () {
             fixture = DataFixture.generate({},0);

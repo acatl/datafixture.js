@@ -15,14 +15,12 @@ Generates random data based on a defined template model.
 ```js
 DataFixture.generate(templateObject, numberOfResults);
 ```
-
 **templateObject**
-is an object with at least one property.
+can be a string with patterns or an object with at least one property.
 
 **numberOfResults**
-is the number of results we want to be generated, if `numberOfResults` is == 0 it outputs an object. if > 0 it outputs an array of objects.
+optional, is the number of results we want to be generated, if `numberOfResults` is == 0 it outputs an object. if > 0 it outputs an array of objects.
 
-# Examples
 
 **Generate an object with a randomly set numeric property**
 

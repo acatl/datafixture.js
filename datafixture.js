@@ -23,6 +23,9 @@
       dataSet = [];
       row = {};
       column = void 0;
+      if (typeof template === 'string') {
+        return _parseValue(template);
+      }
       numberOfRows = template["#"] || numberOfRows || 0;
       if (numberOfRows < 0) {
         numberOfRows = 0;

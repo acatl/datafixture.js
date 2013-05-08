@@ -35,11 +35,12 @@ module.exports = function(grunt) {
         },
 
         watch: {
-            publicscripts: {
+            scripts: {
                 files: [
-                    '*.coffee'
+                    '*.coffee',
+                    'tests/*.js'       
                 ],
-                tasks: ['coffee','uglify']
+                tasks: ['coffee','uglify', 'jasmine']
             }
         }
     });
@@ -51,4 +52,5 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', ['coffee', 'uglify']);
     grunt.registerTask('test', ['jasmine']);
+    grunt.registerTask('dev', ['watch']);
 };

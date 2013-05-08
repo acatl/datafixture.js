@@ -17,6 +17,10 @@ DataFixturePlugin = do ->
         dataSet = []
         row = {}
         column = undefined
+
+        return _parseValue(template) if typeof template is 'string'
+
+
         numberOfRows = template["#"] or numberOfRows or 0
         numberOfRows = 0 if numberOfRows < 0
         numberOfRows = if typeof numberOfRows is "string" then _parseRangeValue(numberOfRows) else numberOfRows
