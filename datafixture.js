@@ -148,7 +148,7 @@
       }
     };
     _parseColumn = function(columnName, columnValue) {
-      var tokens;
+      var tokens, value;
 
       tokens = null;
       if (typeof columnValue === "number") {
@@ -162,7 +162,8 @@
       }
       if (typeof columnValue === "object") {
         if (columnValue.hasOwnProperty("length")) {
-          return columnValue[getRandom(0, columnValue.length - 1)];
+          value = columnValue[getRandom(0, columnValue.length - 1)];
+          return _parseColumn('', value);
         } else {
           tokens = [columnValue, 0];
           if (columnValue.hasOwnProperty("_rows_") && columnValue.hasOwnProperty("_template_")) {

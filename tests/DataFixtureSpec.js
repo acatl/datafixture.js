@@ -85,6 +85,29 @@ describe("Datafixture", function() {
             fixture = DataFixture.generate({'value':array},0);
             expect(array).toContain(fixture.value);
         });
+
+        it("should return a parsed value of the array if value is range", function () {
+            var array = ['1...4'];
+            fixture = DataFixture.generate({'value':array},0);
+            expect(fixture.value).toBeGreaterThan(0);
+            expect(fixture.value).toBeLessThan(5);
+        });
+
+        it("should return a parsed object of the array if value is object", function () {
+            var array = [{range:'1...4'}];
+            fixture = DataFixture.generate({'value':array},0);
+            expect(fixture.value.range).toBeGreaterThan(0);
+            expect(fixture.value.range).toBeLessThan(5);
+        });
+
+        it("should return a parsed mixed object of the array if value is object", function () {
+            var array = [{range:'1...4', lorem:'lorem:1...2'}];
+            fixture = DataFixture.generate({'value':array},0);
+            expect(fixture.value.range).toBeGreaterThan(0);
+            expect(fixture.value.range).toBeLessThan(5);
+            expect(typeof fixture.value.lorem).toEqual('string');
+        });
+
     });
 
 

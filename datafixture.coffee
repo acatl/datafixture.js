@@ -120,8 +120,9 @@ DataFixturePlugin = do ->
         return _parseValue(columnValue)  if typeof columnValue is "string"
         return columnValue()  if typeof columnValue is "function"
         if typeof columnValue is "object"
-            if columnValue.hasOwnProperty("length")
-                return columnValue[getRandom(0, columnValue.length - 1)]
+            if columnValue.hasOwnProperty("length") # array
+                value = columnValue[getRandom(0, columnValue.length - 1)]
+                return _parseColumn('', value);
             else
                 tokens = [columnValue, 0]
                 if columnValue.hasOwnProperty("_rows_") and columnValue.hasOwnProperty("_template_")

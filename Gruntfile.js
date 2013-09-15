@@ -52,5 +52,5 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', ['coffee', 'uglify']);
     grunt.registerTask('test', ['jasmine']);
-    grunt.registerTask('dev', ['watch']);
+    grunt.registerTask('dev', ['coffee','uglify', 'jasmine', 'watch']);
 };
