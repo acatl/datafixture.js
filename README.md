@@ -238,6 +238,47 @@ var x = DataFixture.generate({
 ]
 ```
 
+**Array Values may also be objects**
+
+Array values may also have objects in them, object's properties may also have 
+parsable values. 
+
+```js
+var x = DataFixture.generate({
+    item: [
+        "1...4",
+        "lorem:1...3",
+        { type: "ad" },
+        { type: "video", "url":"http://some.domain.com/videos/?id=|GUID"}
+    ]
+}, 5);
+
+//output
+[ 
+    {
+        "item": 2
+    },
+    {
+        "item": "nunc nec accumsan"
+    },
+    {
+        "item": "porttitor bibendum"
+    },
+    {
+        "item": {
+            "type": "ad"
+        }
+    },
+    {
+        "item": {
+            "type": "video",
+            "url": "http://some.domain.com/videos/?id=168f5078-0eda-b021-fc93-c621a26a4e2e"
+        }
+    }
+]
+```
+
+
 **enjoy!**
 
 All feedback is welcomed
