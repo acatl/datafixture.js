@@ -121,6 +121,12 @@ hr {
   background: #262626;
   border-right: 1px solid #444444; }
 
+.cm-s-lesser-dark span.cm-string {
+  color: #44dbcf; }
+
+.cm-s-lesser-dark span.cm-number {
+  color: #ffc200; }
+
 .wrapper {
   margin: 0 20px; }
 
@@ -289,7 +295,6 @@ hr {
   border-radius: 2px; }
   .external-documentation a {
     display: inline-block;
-    background: #ff5741;
     padding: 4px 4px 5px;
     font-family: sans-serif;
     font-size: 1.3em;
