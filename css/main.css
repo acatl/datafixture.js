@@ -79,7 +79,7 @@ h4 {
 
 body, html {
   color: #8f0e0e;
-  background: #ffcb6e; }
+  background: #b83131; }
 
 body {
   font-size: 10px;
@@ -88,7 +88,7 @@ body {
   line-height: 1; }
 
 a, a:visited {
-  color: black; }
+  color: #ffdb37; }
 
 a:hover {
   color: white;
@@ -225,8 +225,7 @@ hr {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$color1', endColorstr='$color2',GradientType=0 ); }
 
 .header-container {
-  background: #b83131;
-  border-bottom: 3px solid white; }
+  background: #b83131; }
   .header-container h1 {
     font-size: 3.2em;
     margin: 20px 0 0;
@@ -238,7 +237,10 @@ hr {
     font-weight: bold; }
 
 .main-container {
-  padding-top: 20px; }
+  background: #ffcb6e;
+  padding-top: 20px;
+  border-top: 3px solid white;
+  border-bottom: 3px solid white; }
   .main-container h1, .main-container h2, .main-container h3 {
     color: #8f0e0e; }
 
@@ -320,7 +322,7 @@ hr {
   .cm-output {
     width: 60%; } }
 .footer-container {
-  color: #8f0e0e;
+  color: #ffe794;
   margin: 20px 0;
   font-size: 1.1em;
     font-size-text-decoration: none; }
