@@ -42,8 +42,7 @@
       }
       try {
         output = DataFixture.generate(json);
-        cmOutput.setValue(JSON.stringify(output, null, "  "));
-        return console.log(output);
+        return cmOutput.setValue(JSON.stringify(output, null, "  "));
       } catch (_error) {
         e = _error;
         $cmDataFixture.addClass("is-invalid");
@@ -60,13 +59,11 @@
         $outputCodeMirror.css("height", "");
         return;
       }
-      console.log("now");
       windowsHeight = $(window).height();
       offset = $("#datafixture").offset();
       $datafixtureCodeMirror.height(windowsHeight - offset.top - offsetWindowHeight);
       $jsonCodeMirror.height(windowsHeight - offset.top - offsetWindowHeight);
-      $outputCodeMirror.height(windowsHeight - offset.top - offsetWindowHeight);
-      return console.log($datafixtureCodeMirror);
+      return $outputCodeMirror.height(windowsHeight - offset.top - offsetWindowHeight);
     };
     cmDataFixture.on("change", updateOutput);
     $(window).resize(updateUI);
