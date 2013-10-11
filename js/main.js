@@ -83,7 +83,7 @@
   "GUID": "GUID",\n\
   "obj": {\n\
     "#": "1...3",\n\
-    "name": "lorem:1..3",\n\
+    "name": "lorem:1...3",\n\
     "GUID": "GUID",\n\
     "random_hour": "0...24|:|0...59|:|0...59",\n\
     "inner_object": {\n\
